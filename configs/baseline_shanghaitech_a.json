@@ -1,0 +1,54 @@
+{
+  "seed": 42,
+  "experiment_name": "baseline_shanghaitech_a",
+  "data": {
+    "root": "./data/ShanghaiTech",
+    "part": "A",
+    "train_split": "train",
+    "val_split": "test",
+    "train_batch_size": 1,
+    "eval_batch_size": 1,
+    "num_workers": 4,
+    "pin_memory": true,
+    "resize": null,
+    "crop_size": null,
+    "horizontal_flip": true,
+    "downsample_factor": 8
+  },
+  "model": {
+    "name": "csrnet_baseline",
+    "load_imagenet_weights": true,
+    "dropout": 0.0,
+    "context_rates": [1, 2, 4, 8],
+    "attention_reduction": 16
+  },
+  "loss": {
+    "density_weight": 1.0,
+    "count_weight": 0.0,
+    "reduction": "sum"
+  },
+  "optimizer": {
+    "name": "sgd",
+    "lr": 1e-06,
+    "momentum": 0.95,
+    "weight_decay": 0.0005
+  },
+  "scheduler": {
+    "name": "multistep",
+    "milestones": [100, 150],
+    "gamma": 1.0
+  },
+  "training": {
+    "epochs": 100,
+    "device": "cuda",
+    "amp": false,
+    "grad_clip_norm": 5.0,
+    "output_dir": "outputs",
+    "save_every": 10
+  },
+  "evaluation": {
+    "save_predictions": false,
+    "sample_count": 8
+  }
+}
+
